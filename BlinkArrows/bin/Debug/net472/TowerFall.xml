@@ -1,0 +1,1560 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>TowerFall</name>
+  </assembly>
+  <members>
+    <member name="T:FortRise.CommandAttribute">
+      <summary>
+            An attribute marker that adds a command to the developer console from a function.
+            </summary>
+    </member>
+    <member name="F:FortRise.CommandAttribute.CommandName">
+      <summary>
+            A name of the command.
+            </summary>
+    </member>
+    <member name="M:FortRise.CommandAttribute.#ctor(System.String)">
+      <summary>
+            Marked a function to add a command to the developer console.
+            </summary>
+      <param name="commandName">A name of the command</param>
+    </member>
+    <member name="T:FortRise.CustomEnemyAttribute">
+      <summary>
+            An attribute marker that loads an enemy when matching names is detected.
+            <br />
+            It supports in any level format as long as the entity names is matched.
+            </summary>
+    </member>
+    <member name="F:FortRise.CustomEnemyAttribute.Names">
+      <summary>
+            A list of names identifiers for this enemy.
+            </summary>
+    </member>
+    <member name="M:FortRise.CustomEnemyAttribute.#ctor(System.String[])">
+      <summary>
+            Marked a class derived from enemy as a custom enemy.
+            </summary>
+      <param name="names">A list of names identifiers for this enemy</param>
+    </member>
+    <member name="T:FortRise.EntityRegistry">
+      <summary>
+            A class that registers custom entity from types.
+            </summary>
+    </member>
+    <member name="T:FortRise.FortContent">
+      <summary>
+            A class that holds the whole mod's content and provides an API to create a lookup stream.
+            </summary>
+      <remarks>
+            This class is only use for getting a mod content inside of a module. 
+            This will not interact the filesystem outside of the mod content.
+            </remarks>
+    </member>
+    <member name="P:FortRise.FortContent.ContentPath">
+      <summary>
+            A property where your default Content lookup is being used. Some methods are relying on this.
+            </summary>
+      <value>The <c>ContentPath</c> property represents your Content path.</value>
+    </member>
+    <member name="M:FortRise.FortContent.LoadAtlas(System.String,System.String)">
+      <summary>
+            Load Atlas from a mod Content path. This will use the <c>ContentPath</c> property, it's `Content/` by default.
+            </summary>
+      <param name="dataPath">A path to where the xml or json path is.</param>
+      <param name="imagePath">A path to where the png path is.</param>
+      <returns>An atlas of an image.</returns>
+    </member>
+    <member name="M:FortRise.FortContent.LoadAtlas(System.String)">
+      <summary>
+            Load Atlas from a mod Content path without extension. This will use the <c>ContentPath</c> property, it's `Content/` by default.
+            </summary>
+      <param name="path">A path to where an atlas data name and atlas png name can be match together</param>
+      <returns>An atlas of an image.</returns>
+    </member>
+    <member name="M:FortRise.FortContent.LoadSpriteData(System.String,Monocle.patch_Atlas)">
+      <summary>
+            Load SpriteData from a mod Content path. 
+            This will use the <c>ContentPath</c> property, it's <c>Content</c> by default.
+            </summary>
+      <param name="filename">A path to the SpriteData xml.</param>
+      <param name="atlas">An atlas which the spriteData will use.</param>
+      <returns>A SpriteData instance to be use for sprite</returns>
+    </member>
+    <member name="M:FortRise.FortContent.TryLoadSpriteData(System.String,Monocle.patch_SpriteData@)">
+      <summary>
+            Try to load SpriteData from a mod Content path. If it succeed, it returns true if it succeed, else false.
+            The SpriteData must have an attribute called "atlas" referencing the atlas path that exists to use to succeed.
+            This will use the <c>ContentPath</c> property, it's <c>Content</c> by default.
+            </summary>
+      <param name="filename">A path to the SpriteData xml.</param>
+      <param name="result">A SpriteData instance to be use for sprite if it succeed, else null</param>
+      <returns>true if it succeed, else false</returns>
+    </member>
+    <member name="M:FortRise.FortContent.LoadStream(System.String)">
+      <summary>
+            Load a stream from a mod Content path.
+            This will use the <c>ContentPath</c> property, it's <c>Content</c> by default.
+            </summary>
+      <param name="path">A path to file.</param>
+      <returns>A FileStream or ZipStream.</returns>
+    </member>
+    <member name="M:FortRise.FortContent.LoadRawTexture2D(System.String)">
+      <summary>
+            Load a raw Texture2D from an image from a mod Content path.
+            This will use the <c>ContentPath</c> property, it's <c>Content</c> by default.
+            </summary>
+      <returns>A raw Texture2D that can be use for low-level texture access.</returns>
+    </member>
+    <member name="M:FortRise.FortContent.LoadTexture(System.String)">
+      <summary>
+            Load a Texture from an image from a mod Content path.
+            This will use the <c>ContentPath</c> property, it's <c>Content</c> by default.
+            </summary>
+      <returns>A Monocle Texture</returns>
+    </member>
+    <member name="M:FortRise.FortContent.LoadText(System.String)">
+      <summary>
+            Load text inside of a file 
+            </summary>
+      <param name="path">A path to a file</param>
+      <returns>A text inside of a file</returns>
+    </member>
+    <member name="M:FortRise.FortContent.LoadXML(System.String)">
+      <summary>
+            Load <see cref="T:System.Xml.XmlDocument" /> from a file.
+            </summary>
+      <param name="path">A path to a file</param>
+      <returns>A <see cref="T:System.Xml.XmlDocument" /></returns>
+    </member>
+    <member name="P:FortRise.FortModule.SettingsType">
+      <summary>
+            Use to let the mod loader know which settings type to initialize.
+            </summary>
+    </member>
+    <member name="F:FortRise.FortModule.InternalSettings">
+      <summary>
+            An initialized settings from <see cref="P:FortRise.FortModule.SettingsType" />. Cast this with your own settings type.
+            </summary>
+    </member>
+    <member name="F:FortRise.FortModule.Content">
+      <summary>
+            The module's mod content which use to load atlases, spriteDatas, SFXes, etc..
+            </summary>
+    </member>
+    <member name="M:FortRise.FortModule.Load">
+      <summary>
+            Override this function to load your hooks, events, and set environment variables for your mod.
+            <br />
+            DO NOT LOAD YOUR CONTENTS HERE OR INITIALIZE SOMETHING. 
+            <br />
+            Use <see cref="M:FortRise.FortModule.LoadContent" />
+            or <see cref="M:FortRise.FortModule.Initialize" /> instead.
+            </summary>
+    </member>
+    <member name="M:FortRise.FortModule.Unload">
+      <summary>
+            Override this function to unload your hooks or dispose your resources.
+            </summary>
+    </member>
+    <member name="M:FortRise.FortModule.AfterLoad">
+      <summary>
+            Override this function and this is called after all mods are loaded and 
+            this mod is registered.
+            </summary>
+    </member>
+    <member name="M:FortRise.FortModule.LoadContent">
+      <summary>
+            Override this function and load your contents here such as <see cref="T:Monocle.Atlas" />,
+            <see cref="T:Monocle.SFX" />, <see cref="T:Monocle.SpriteData" />, etc.. <br />
+            There is <see cref="F:FortRise.FortModule.Content" /> you can use to load your content inside of your mod folder or zip. 
+            </summary>
+    </member>
+    <member name="M:FortRise.FortModule.Initialize">
+      <summary>
+            Override this function and this is called after all the game data is loaded.
+            </summary>
+    </member>
+    <member name="M:FortRise.FortModule.OnVariantsRegister(FortRise.VariantManager,System.Boolean)">
+      <summary>
+            Override this function and allows you to add your own variant using the <paramref name="manager" />.
+            </summary>
+      <param name="manager">A <see cref="T:FortRise.VariantManager" /> use to add variant</param>
+      <param name="noPerPlayer">Checks if the variant would not a per player variant, default is true</param>
+    </member>
+    <member name="M:FortRise.FortModule.ParseArgs(System.String[])">
+      <summary>
+            Override this function and allows you to parse a launch arguments that has been passed to the game.
+            </summary>
+      <param name="args">A launch arguments that has been passed to the game</param>
+    </member>
+    <member name="M:FortRise.FortModule.IsModExists(System.String)">
+      <inheritdoc cref="M:FortRise.RiseCore.IsModExists(System.String)" />
+    </member>
+    <member name="T:FortRise.ModuleSaveData">
+      <summary>
+            A FortRise module SaveData API allows to persists a data by saving and loading to a file.
+            Works via a Formatter built with <see href="https://www.nuget.org/packages/TeuJson">TeuJson</see>. 
+            </summary>
+    </member>
+    <member name="P:FortRise.ModuleSaveData.Formatter">
+      <summary>
+            A formatter to use for saving and loading the data. Most notably Formatter is <see cref="T:FortRise.JsonSaveDataFormat" />.
+            <br />
+            You can also implement your own Formatter.
+            </summary>
+    </member>
+    <member name="M:FortRise.ModuleSaveData.#ctor(FortRise.SaveDataFormat)">
+      <summary>
+            A constructor that accepts an argument to create a Formatter.
+            </summary>
+      <param name="format">A formatter to use to be able to save and load your data. Most notably Formatter is <see cref="T:FortRise.JsonSaveDataFormat" /></param>
+    </member>
+    <member name="M:FortRise.ModuleSaveData.Save(FortRise.FortModule)">
+      <summary>
+            A function that is used to setup your saves and submit by closing a Formatter with a given input of your object.
+            </summary>
+      <param name="fortModule">A mod module</param>
+      <returns>A closed Formatter to submit</returns>
+    </member>
+    <member name="M:FortRise.ModuleSaveData.Load(FortRise.SaveDataFormat)">
+      <summary>
+            A function that is used to assign your fields by using the Formatter. 
+            The formatter is needed to be casted into a correct type of your formatter you used.
+            <code>
+            var castedFormatter = formatter.CastTo[T]();
+            // where T : SaveDataFormat
+            </code></summary>
+      <param name="formatter">A formatter you used that needed to be casted</param>
+    </member>
+    <member name="M:FortRise.ModuleSaveData.Verify">
+      <summary>
+            A function that called when SaveData is being verified.
+            </summary>
+    </member>
+    <member name="T:FortRise.ClosedFormat">
+      <summary>
+            A finalized format to submit for save.
+            </summary>
+    </member>
+    <member name="M:FortRise.ClosedFormat.#ctor(FortRise.SaveDataFormat)">
+      <summary>
+            A constructor that created ClosedFormat from the Formatter.
+            </summary>
+      <param name="format">A formatter to be closed</param>
+    </member>
+    <member name="T:FortRise.SaveDataFormat">
+      <summary>
+            An abstract class for Formatter that is used for SaveData API.
+            </summary>
+    </member>
+    <member name="F:FortRise.SaveDataFormat.SavePath">
+      <summary>
+            A path to save the path. This is set by the mod loader, but you used this in your own formatter.
+            </summary>
+    </member>
+    <member name="P:FortRise.SaveDataFormat.FileExtension">
+      <summary>
+            A file extension that this format used. (e.g json, xml, yaml)
+            <br />
+            NOTE: Do not add '.' when filling up this property.
+            </summary>
+    </member>
+    <member name="M:FortRise.SaveDataFormat.Save">
+      <summary>
+            A function that to save the object from a closed formatter to a file.
+            </summary>
+    </member>
+    <member name="M:FortRise.SaveDataFormat.Load">
+      <summary>
+            A function to load an object and to store it inside of the formatter. 
+            </summary>
+      <returns>A success or failure boolean</returns>
+    </member>
+    <member name="M:FortRise.SaveDataFormat.Close">
+      <summary>
+            A function to close a formatter without an object.
+            </summary>
+      <returns>A closed formatter</returns>
+    </member>
+    <member name="M:FortRise.SaveDataFormat.Close(System.Object)">
+      <summary>
+            A function to close a formatter.
+            </summary>
+      <param name="obj">An object to pass to the formatter to be stored inside</param>
+      <returns>A closed formatter</returns>
+    </member>
+    <member name="T:FortRise.SaveDataFormatExt">
+      <summary>
+            A utility and extension class for SaveDataFormat
+            </summary>
+    </member>
+    <member name="M:FortRise.SaveDataFormatExt.CastTo``1(FortRise.SaveDataFormat)">
+      <summary>
+            An extension that cast a Formatter to a correct Formatter.
+            </summary>
+      <param name="format">A formatter to be casted</param>
+      <typeparam name="T">A SaveDataFormat type to used</typeparam>
+      <returns>A Formatter with the corrected type</returns>
+    </member>
+    <member name="T:FortRise.JsonBinarySaveDataFormat">
+      <summary>
+            A built-in Json Binary formatter that can be use for constructing a SaveData module.
+            </summary>
+    </member>
+    <member name="P:FortRise.JsonBinarySaveDataFormat.FileExtension">
+      <summary>
+            A Json Binary file extension
+            </summary>
+    </member>
+    <member name="M:FortRise.JsonBinarySaveDataFormat.Load">
+      <summary>
+            Loads the SaveData Json Binary file. Handles automatically by the Mod Loader.
+            </summary>
+      <returns>A success or failure boolean</returns>
+    </member>
+    <member name="M:FortRise.JsonBinarySaveDataFormat.Save">
+      <summary>
+            Save the SaveData Json Binary file. Handles automatically by the Mod Loader.
+            </summary>
+    </member>
+    <member name="T:FortRise.JsonSaveDataFormat">
+      <summary>
+            A built-in Json formatter that can be use for constructing a SaveData module.
+            </summary>
+    </member>
+    <member name="F:FortRise.JsonSaveDataFormat.BaseValue">
+      <summary>
+            A stored base value that handles all of the necessary data for your saves.
+            </summary>
+    </member>
+    <member name="P:FortRise.JsonSaveDataFormat.FileExtension">
+      <summary>
+            A Json file extension
+            </summary>
+    </member>
+    <member name="M:FortRise.JsonSaveDataFormat.#ctor">
+      <summary>
+            A constructor that create the formatter.
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:FortRise.JsonSaveDataFormat.Load">
+      <summary>
+            Loads the SaveData Json file. Handles automatically by the Mod Loader.
+            </summary>
+      <returns>A success or failure boolean</returns>
+    </member>
+    <member name="M:FortRise.JsonSaveDataFormat.Save">
+      <summary>
+            Save the SaveData Json file. Handles automatically by the Mod Loader.
+            </summary>
+    </member>
+    <member name="M:FortRise.JsonSaveDataFormat.GetJsonObject">
+      <summary>
+            A function that get the Json Object with the necessary data for your saves.
+            </summary>
+      <returns>A Json Object</returns>
+    </member>
+    <member name="M:FortRise.JsonSaveDataFormat.Close(TeuJson.JsonObject)">
+      <summary>
+            A function to close a formatter and stores Json Object.
+            </summary>
+      <param name="obj">A Json Object to pass to the formatter to be stored inside</param>
+      <returns>A closed formatter</returns>
+    </member>
+    <member name="M:FortRise.JsonSaveDataFormat.Close(System.Object)">
+      <summary>
+            A function to close a formatter. (Recommend to use the Close(JsonObject obj) overload instead)
+            </summary>
+      <param name="obj">An object to pass to the formatter to be stored inside</param>
+      <returns>A closed formatter</returns>
+    </member>
+    <member name="M:FortRise.JsonSaveDataFormat.Close">
+      <summary>
+            A function to close a formatter without an object.
+            </summary>
+      <returns>A closed formatter</returns>
+    </member>
+    <member name="T:FortRise.ModuleSettings">
+      <summary>
+            A FortRise module settings API that automatically built a settings option for your module. 
+            </summary>
+    </member>
+    <member name="M:FortRise.ModuleSettings.Save(System.String)">
+      <summary>
+            Saves your settings path. This handles automatically by the mod loader.
+            </summary>
+      <param name="path">A path to save</param>
+    </member>
+    <member name="M:FortRise.ModuleSettings.Load(System.String)">
+      <summary>
+            Loads settings from a given path. This handles automatically by the mod loader.
+            </summary>
+      <param name="path">A path to load</param>
+    </member>
+    <member name="T:FortRise.SettingsNameAttribute">
+      <summary>
+            An attribute marker to change the visual name of a field inside of an option.
+            NOTE: This does not rename the field name when save.
+            </summary>
+    </member>
+    <member name="F:FortRise.SettingsNameAttribute.Name">
+      <summary>
+            A name of an option.
+            </summary>
+    </member>
+    <member name="M:FortRise.SettingsNameAttribute.#ctor(System.String)">
+      <summary>
+            Marked a field to change the visual name of a field inside of an option.
+            </summary>
+      <param name="name">A name for the option</param>
+    </member>
+    <member name="T:FortRise.SettingsNumberAttribute">
+      <summary>
+            An attribute marker to change an option to be selectable as number.
+            It can specify a minimum length, maximum length, and how it step through the number.
+            </summary>
+    </member>
+    <member name="F:FortRise.SettingsNumberAttribute.Min">
+      <summary>
+            A minimum length.
+            </summary>
+    </member>
+    <member name="F:FortRise.SettingsNumberAttribute.Max">
+      <summary>
+            A maximum length.
+            </summary>
+    </member>
+    <member name="F:FortRise.SettingsNumberAttribute.Step">
+      <summary>
+            A step on how it change through the number.
+            </summary>
+    </member>
+    <member name="M:FortRise.SettingsNumberAttribute.#ctor(System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Marked a field of float or int to change an option to be selectable as number.
+            </summary>
+      <param name="min">A minimum length</param>
+      <param name="max">A maximum length</param>
+      <param name="step">A step on how it change through the number</param>
+    </member>
+    <member name="T:FortRise.SettingsOptionsAttribute">
+      <summary>
+            An attribute marker that turns an option to have an ability to select a different option.
+            </summary>
+    </member>
+    <member name="F:FortRise.SettingsOptionsAttribute.Options">
+      <summary>
+            An array of options. 
+            </summary>
+    </member>
+    <member name="M:FortRise.SettingsOptionsAttribute.#ctor(System.String[])">
+      <summary>
+            Marked a field of string to have a different option to select.
+            </summary>
+      <param name="options">An options to select inside of the settings</param>
+    </member>
+    <member name="T:FortRise.Ogmo3ToOel">
+      <summary>
+            A utility class that loads and convert Ogmo Editor 3 level Json format to Ogmo Editor level OEL/XML format.
+            </summary>
+    </member>
+    <member name="M:FortRise.Ogmo3ToOel.LoadOgmo(System.String)">
+      <summary>
+            Loads a Ogmo Editor 3 *.json level file.
+            </summary>
+      <param name="path">A path to the *.json file</param>
+      <returns>An Ogmo Editor 3 level data</returns>
+    </member>
+    <member name="M:FortRise.Ogmo3ToOel.LoadOgmo(System.IO.Stream)">
+      <summary>
+            Loads a Ogmo Editor 3 *.json level file.
+            </summary>
+      <param name="stream">A stream containing the *.json file</param>
+      <returns>An Ogmo Editor 3 level data</returns>
+    </member>
+    <member name="M:FortRise.Ogmo3ToOel.OgmoToOel(FortRise.OgmoLevelData)">
+      <summary>
+            Convert an Ogmo Editor 3 level data into Ogmo Editor XML/OEL level data.
+            </summary>
+      <param name="levelData">An Ogmo Editor 3 level Json format to convert</param>
+      <returns>XmlDocument that represent Ogmo Editor XML/OEL level data</returns>
+    </member>
+    <member name="M:FortRise.Ogmo3ToOel.Array2DToCSV(System.Int32[0:,0:])">
+      <summary>
+            Convert an Array2D to CSV format.
+            </summary>
+      <param name="array2D">An Array2D to be converted as CSV format</param>
+      <returns>CSV String</returns>
+    </member>
+    <member name="M:FortRise.Ogmo3ToOel.Array2DToBitString(System.String[0:,0:])">
+      <summary>
+            Convert an Array2D to bit string format.
+            </summary>
+      <param name="array2D">An Array2D to be converted as bitstring format</param>
+      <returns>Bit string</returns>
+    </member>
+    <member name="M:FortRise.Ogmo3ToOel.Array2DToStraightBitString(System.String[0:,0:])">
+      <summary>
+            Convert an Array2D to bit string format without a line break.
+            </summary>
+      <param name="array2D">An Array2D to be converted as bitstring format</param>
+      <returns>Bit string</returns>
+    </member>
+    <member name="T:FortRise.OgmoLevelData">
+      <summary>
+            Ogmo Editor 3 level data.
+            </summary>
+    </member>
+    <member name="M:FortRise.CustomGameMode.Initialize">
+      <summary>
+            Initialize the fields you need to initialize such as Name, Icon and ModeType. 
+            <br />
+            For initializing SFX, <see cref="M:FortRise.CustomGameMode.InitializeSounds" />.
+            </summary>
+    </member>
+    <member name="M:FortRise.CustomGameMode.InitializeSounds">
+      <summary>
+            Initialize your SFX here such as <see cref="P:FortRise.CustomGameMode.EarnedCoinSound" /> 
+            and <see cref="P:FortRise.CustomGameMode.LoseCoinSound" />.
+            </summary>
+    </member>
+    <member name="M:FortRise.CustomGameMode.StartGame(TowerFall.Session)">
+      <summary>
+            Initialize your game mode state here
+            <param name="session">A game session that you can access if you need to modify some parts of it</param></summary>
+    </member>
+    <member name="M:FortRise.CustomGameMode.CreateRoundLogic(TowerFall.Session)">
+      <summary>
+            Instantiate your round logic here to create your own logic for your gamemode.
+            You can either use the vanilla round logic or derived atleast one of it with its different behaviour.
+            <param name="session">A game session needed to be passed for round logic</param></summary>
+    </member>
+    <member name="M:FortRise.CustomGameMode.GetLevelSystem(TowerFall.LevelData)">
+      <summary>
+            Instatiate your own level system here to create a custom level system.
+            <param name="levelData">A data needed to be passed for level systems</param></summary>
+    </member>
+    <member name="M:FortRise.CustomGameMode.CoinSprite">
+      <summary>
+            A sprite to used for points system. Default is the coin (Last Man Standing or TDM).
+            <br />
+            To change it to skull, override this function and return UseSkullSprite()
+            </summary>
+    </member>
+    <member name="M:FortRise.CustomGameMode.UseSkullSprite">
+      <summary>
+            A ready to use skull sprite with offset adjusted as well.
+            </summary>
+    </member>
+    <member name="T:FortRise.TowerPatch">
+      <summary>
+            Patch any towers by deriving from this class.
+            Name your class with the tower name you want to patch, must not have any spaces.
+            Make sure that you properly spelled it and it is case sensitive.
+            </summary>
+    </member>
+    <member name="M:FortRise.VersusTowerPatchContext.IncreaseTreasureRates(TowerFall.Pickups,System.Int32)">
+      <summary>
+            Increase the treasure rate of a pickup in this tower.
+            </summary>
+      <param name="pickup">An enum pickup to add or increase</param>
+      <param name="rate">How many pickups in this tower will appear, default is 1</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusTowerPatchContext.IncreaseTreasureRates(System.String,System.Int32)">
+      <summary>
+            Increase the treasure rate of a pickup in this tower.
+            </summary>
+      <param name="pickup">A string pickup to add or increase</param>
+      <param name="rate">How many pickups in this tower will appear, default is 1</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusTowerPatchContext.DecreaseTreasureRates(System.String,System.Int32)">
+      <summary>
+            Decrease the treasure rate of a pickup in this tower.
+            </summary>
+      <param name="pickup">A string pickup to decrease or completely removed if reached to 0</param>
+      <param name="rate">How many rates of the pickup in this tower will be decrease, default is 1</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusTowerPatchContext.DecreaseTreasureRates(TowerFall.Pickups,System.Int32)">
+      <summary>
+            Decrease the treasure rate of a pickup in this tower.
+            </summary>
+      <param name="pickup">An enum pickup to decrease or completely removed if reached to 0</param>
+      <param name="rate">How many rates of the pickup in this tower will be decrease, default is 1</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusTowerPatchContext.RemoveTreasureRates(TowerFall.Pickups)">
+      <summary>
+            Remove the treasure rate of a pickup in this tower. (Note that this will not be completely removed,
+            if there is any mods that adding the same pickup as you want to remove them).
+            </summary>
+      <param name="pickup">An enum pickup to remove in this tower</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusTowerPatchContext.RemoveTreasureRates(System.String)">
+      <summary>
+            Remove the treasure rate of a pickup in this tower. (Note that this will not be completely removed,
+            if there is any mods that adding the same pickup as you want to remove them).
+            </summary>
+      <param name="pickup">A string pickup to remove in this tower</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="T:FortRise.OnTower">
+      <summary>
+            Patch Vanilla versus towers with this struct. 
+            If you want to patch outside of <see cref="M:FortRise.ITowerPatcher.PatchTower(FortRise.OnTower)" />,
+            you just create this struct and pass around your Fort Module.
+            </summary>
+    </member>
+    <member name="T:FortRise.DarkWorldPatch">
+      <summary>
+            A struct that patch the dark world towers. Please use this <see cref="M:FortRise.ITowerPatcher.PatchTower(FortRise.OnTower)" /> 
+            to handle the patch.
+            </summary>
+    </member>
+    <member name="T:FortRise.ITowerPatcher">
+      <summary>
+            An interface to directly inject the Tower Patcher code in Fort Modules.
+            </summary>
+    </member>
+    <member name="M:FortRise.ITowerPatcher.PatchTower(FortRise.OnTower)">
+      <summary>
+            A method to perform the tower patching.
+            </summary>
+      <param name="tower">A struct containing the logic of tower patching</param>
+    </member>
+    <member name="T:FortRise.VersusPatch">
+      <summary>
+            A struct that patch the versus towers. Please use this <see cref="M:FortRise.ITowerPatcher.PatchTower(FortRise.OnTower)" /> 
+            to handle the patch.
+            </summary>
+    </member>
+    <member name="M:FortRise.VersusPatch.IncreaseTreasureRates(TowerFall.Pickups,System.Int32)">
+      <summary>
+            Increase the treasure rate of a pickup in this tower.
+            </summary>
+      <param name="pickup">An enum pickup to add or increase</param>
+      <param name="rate">How many pickups in this tower will appear, default is 1</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusPatch.IncreaseTreasureRates(System.String,System.Int32)">
+      <summary>
+            Increase the treasure rate of a pickup in this tower.
+            </summary>
+      <param name="pickup">A string pickup to add or increase</param>
+      <param name="rate">How many pickups in this tower will appear, default is 1</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusPatch.DecreaseTreasureRates(System.String,System.Int32)">
+      <summary>
+            Decrease the treasure rate of a pickup in this tower.
+            </summary>
+      <param name="pickup">A string pickup to decrease or completely removed if reached to 0</param>
+      <param name="rate">How many rates of the pickup in this tower will be decrease, default is 1</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusPatch.DecreaseTreasureRates(TowerFall.Pickups,System.Int32)">
+      <summary>
+            Decrease the treasure rate of a pickup in this tower.
+            </summary>
+      <param name="pickup">An enum pickup to decrease or completely removed if reached to 0</param>
+      <param name="rate">How many rates of the pickup in this tower will be decrease, default is 1</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusPatch.RemoveTreasureRates(TowerFall.Pickups)">
+      <summary>
+            Remove the treasure rate of a pickup in this tower. (Note that this will not be completely removed,
+            if there is any mods that adding the same pickup as you want to remove them).
+            </summary>
+      <param name="pickup">An enum pickup to remove in this tower</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="M:FortRise.VersusPatch.RemoveTreasureRates(System.String)">
+      <summary>
+            Remove the treasure rate of a pickup in this tower. (Note that this will not be completely removed,
+            if there is any mods that adding the same pickup as you want to remove them).
+            </summary>
+      <param name="pickup">A string pickup to remove in this tower</param>
+      <returns>A context of this struct</returns>
+    </member>
+    <member name="T:FortRise.RoundLogicLoader">
+      <summary>
+            A loader delegate for custom RoundLogic.
+            </summary>
+      <param name="session">A game current session</param>
+      <param name="canHaveMiasma">If the RoundLogic can have miasma</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:FortRise.RiseCore">
+      <summary>
+            Core API of FortRise
+            </summary>
+    </member>
+    <member name="P:FortRise.RiseCore.GameRootPath">
+      <summary>
+            A TowerFall root directory.
+            </summary>
+    </member>
+    <member name="P:FortRise.RiseCore.Modules">
+      <summary>
+            Contains a read-only access to all of the Fort Modules.
+            </summary>
+    </member>
+    <member name="P:FortRise.RiseCore.Mods">
+      <summary>
+            Contains a read-only access to all of the Mods' metadata and resource.
+            </summary>
+    </member>
+    <member name="F:FortRise.RiseCore.FortRiseVersion">
+      <summary>
+            A current version of FortRise.
+            <note>This should be not used to check for Latest Version and Current Version, 
+            this is an information for logging purposes.</note></summary>
+    </member>
+    <member name="P:FortRise.RiseCore.IsWindows">
+      <summary>
+            Checks if the OS that is currently running is Windows. 
+            </summary>
+      <value>true if the OS is running on Windows, otherwise false.</value>
+    </member>
+    <member name="F:FortRise.RiseCore.DebugMode">
+      <summary>
+            Checks if the FortRise is currently running on Debug Mode.
+            <note>It is better to use conditionals if the runtime debugging is not needed.</note></summary>
+    </member>
+    <member name="F:FortRise.RiseCore.WillRestart">
+      <summary>
+            Check if the game is about to restart.
+            </summary>
+    </member>
+    <member name="M:FortRise.RiseCore.AskForRestart(FortRise.FortModule)">
+      <summary>
+            Ask the mod loader to restart the game. If it isn't possible to restart, the call will be ignored.
+            </summary>
+    </member>
+    <member name="M:FortRise.RiseCore.IsModExists(System.String)">
+      <summary>
+            Checks if a <see cref="T:FortRise.FortModule" /> exists or been loaded. This checks for a Fort name, not a metadata name.
+            </summary>
+      <param name="modName">A Fort name, not a metadata name</param>
+      <returns>true if found, else false</returns>
+    </member>
+    <member name="T:FortRise.RiseCore.Events">
+      <summary>
+            List of built-in useful events that can be subscribe by a modules.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnQuestSpawnWave">
+      <summary>
+            Called when the quest wave spawn
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnMainBegin">
+      <summary>
+            Called when the main menu has started
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnMapBegin">
+      <summary>
+            Called when the map scene has started
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnQuestRegisterEnemyKills">
+      <summary>
+            Called when the map scene has started
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnLevelLoaded">
+      <summary>
+            Called after the level has been loaded
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnLevelEntered">
+      <summary>
+            Called when entered a level.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnLevelExited">
+      <summary>
+            Called when exited the level via Quit or Map.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnBeforeDataLoad">
+      <summary>
+            Called before the GameData.Load() called.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnAfterDataLoad">
+      <summary>
+            Called after the GameData.Load() called.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnPreInitialize">
+      <summary>
+            Called before the game initialization state.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnPostInitialize">
+      <summary>
+            Called after the game initialization state.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnBeforeUpdate">
+      <summary>
+            Called before the game loop. 
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnUpdate">
+      <summary>
+            Called during the game loop.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnAfterUpdate">
+      <summary>
+            Called after the game loop.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnBeforeRender">
+      <summary>
+            Called before the backbuffer renders.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnRender">
+      <summary>
+            Called when the backbuffer renders.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnAfterRender">
+      <summary>
+            Called after the backbuffer renders.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnModInitialized">
+      <summary>
+            Called after a mod initialized.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnAdventureDarkWorldTowerDataAdd">
+      <summary>
+            Called after an adventure dark world tower has been added.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnAdventureQuestTowerDataAdd">
+      <summary>
+            Called after an adventure quest tower has been added.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnAdventureVersusTowerDataAdd">
+      <summary>
+            Called after an adventure versus tower has been added.
+            </summary>
+    </member>
+    <member name="E:FortRise.RiseCore.Events.OnAdventureTrialsTowerDatasAdd">
+      <summary>
+            Called after an adventure trials towers has been added.
+            </summary>
+    </member>
+    <member name="P:FortRise.RiseCore.GameChecksum">
+      <summary>
+            A TowerFall checksum executable.
+            </summary>
+    </member>
+    <member name="T:FortRise.RiseCore.Resource">
+      <summary>
+            A class that contains a path and stream to your resource works both on folder and zip. 
+            </summary>
+    </member>
+    <member name="T:FortRise.CallHelper">
+      <summary>
+            A utility class for calling a method.
+            </summary>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``2(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``2(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``3(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``3(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``4(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``4(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``5(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``5(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``6(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``6(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``7(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``7(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``8(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``8(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``9(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <typeparam name="T7">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``9(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <typeparam name="T7">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``10(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <typeparam name="T7">A type of an argument</typeparam>
+      <typeparam name="T8">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``10(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <typeparam name="T7">A type of an argument</typeparam>
+      <typeparam name="T8">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``11(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <typeparam name="T7">A type of an argument</typeparam>
+      <typeparam name="T8">A type of an argument</typeparam>
+      <typeparam name="T9">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``11(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <typeparam name="T7">A type of an argument</typeparam>
+      <typeparam name="T8">A type of an argument</typeparam>
+      <typeparam name="T9">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``12(System.String)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <typeparam name="T7">A type of an argument</typeparam>
+      <typeparam name="T8">A type of an argument</typeparam>
+      <typeparam name="T9">A type of an argument</typeparam>
+      <typeparam name="T10">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="M:FortRise.CallHelper.CallBaseGen``12(System.String,System.Reflection.BindingFlags)">
+      <summary>
+            Generate a base method to be call later.
+            </summary>
+      <param name="methodName">A method name</param>
+      <param name="flags">A binding flags for specific use cases</param>
+      <typeparam name="TBase">A base type</typeparam>
+      <typeparam name="TTarget">A target type</typeparam>
+      <typeparam name="T1">A type of an argument</typeparam>
+      <typeparam name="T2">A type of an argument</typeparam>
+      <typeparam name="T3">A type of an argument</typeparam>
+      <typeparam name="T4">A type of an argument</typeparam>
+      <typeparam name="T5">A type of an argument</typeparam>
+      <typeparam name="T6">A type of an argument</typeparam>
+      <typeparam name="T7">A type of an argument</typeparam>
+      <typeparam name="T8">A type of an argument</typeparam>
+      <typeparam name="T9">A type of an argument</typeparam>
+      <typeparam name="T10">A type of an argument</typeparam>
+      <returns>A base function</returns>
+    </member>
+    <member name="T:FortRise.StringUtils">
+      <summary>
+            Collections of utilities for strings
+            </summary>
+    </member>
+    <member name="M:FortRise.StringUtils.SeparateCases(System.String)">
+      <summary>
+             Add spaces to the text from capital letters. (ex. LastManStanding -&gt; Last Man Standing).
+            </summary>
+      <param name="characters">An input text to transform with</param>
+      <returns>A text with spaced between capital letters</returns>
+    </member>
+    <member name="M:FortRise.StringUtils.SeparateCases(System.ReadOnlySpan{System.Char})">
+      <summary>
+             Add spaces to the text from capital letters. (ex. LastManStanding -&gt; Last Man Standing).
+            </summary>
+      <param name="characters">A span containing the pointer to string</param>
+      <returns>A text with spaced between capital letters</returns>
+    </member>
+    <member name="M:FortRise.StringUtils.ToTitleCase(System.String)">
+      <summary>
+            Transform the text into a title case (ex. sacred ground -&gt; Sacred Ground) 
+            </summary>
+      <param name="characters">An input text to transform with</param>
+      <returns>A title cased text</returns>
+    </member>
+    <member name="M:FortRise.StringUtils.ToTitleCase(System.ReadOnlySpan{System.Char})">
+      <summary>
+            Transform the text into a title case (ex. sacred ground -&gt; Sacred Ground) 
+            </summary>
+      <param name="characters">A span containing the pointer to string</param>
+      <returns>A title cased text</returns>
+    </member>
+    <member name="T:FortRise.VariantManager">
+      <summary>
+            Use to manage variants on load.
+            </summary>
+    </member>
+    <member name="P:FortRise.VariantManager.CurrentContext">
+      <summary>
+            The current name of the module registering their variants.
+            </summary>
+    </member>
+    <member name="P:FortRise.VariantManager.MatchVariants">
+      <summary>
+        <see cref="T:TowerFall.MatchVariants" /> is a TowerFall class for holding all the variants.
+            </summary>
+    </member>
+    <member name="M:FortRise.VariantManager.AddVariant(FortRise.CustomVariantInfo,System.Boolean)">
+      <summary>
+            Use to add variants to <see cref="T:TowerFall.MatchVariants" />.
+            </summary>
+      <param name="info">A <see cref="T:FortRise.CustomVariantInfo" /> is needed to know what
+            kind of variant is being passed to the holder.
+            </param>
+      <param name="noPerPlayer">A <see langwords="bool" /> value if you want the variant
+            to have it on all players without excluding one of them.
+            </param>
+      <returns>A built <see cref="T:TowerFall.Variant" /> to be used for linking or just 
+            ignore
+            </returns>
+    </member>
+    <member name="M:FortRise.VariantManager.GetVariantIconFromName(System.String,Monocle.Atlas)">
+      <summary>
+            Get a variant icon from name with an atlas pass around. Note: It is recommended to
+            just pass a <see cref="T:Monocle.Subtexture" /> Icon to the <see cref="T:FortRise.CustomVariantInfo" /> instead.
+            </summary>
+      <param name="variantName">A name of the variant</param>
+      <param name="atlas">An atlas that includes the variants folder and 
+            an exact name of the variant</param>
+      <returns>A <see cref="T:Monocle.Subtexture" /> from the atlas</returns>
+    </member>
+    <member name="M:FortRise.VariantManager.GetVariantIconFromName(System.String)">
+      <summary>
+             Get a variant icon from name within the context. 
+             Note that you should only use this on the 
+            <see cref="M:FortRise.FortModule.OnVariantsRegister(FortRise.VariantManager,System.Boolean)" />, or else
+             you will get a possible error.
+             </summary>
+      <param name="variantName">A name of the variant</param>
+      <returns>A <see cref="T:Monocle.Subtexture" /> from the atlas</returns>
+    </member>
+    <member name="M:FortRise.VariantManager.CreateLinks(TowerFall.Variant[])">
+      <summary>
+            Use to link the variants and you won't be able to select both of these variants anymore.
+            Only one of the variants can be selected.
+            </summary>
+      <param name="variants">A variants that you want to link together</param>
+    </member>
+    <member name="M:FortRise.VariantManager.GetCustomVariant(System.String)">
+      <summary>
+            A static function that allows you to get a custom variant on the fly if you're in
+            a level scene.
+            </summary>
+      <param name="variantName">A variant name</param>
+      <returns>A variant use to check if it's activated or not</returns>
+    </member>
+    <member name="M:FortRise.VariantManager.Dispose">
+      <summary>
+            Dispose all of the uses collection. 
+            </summary>
+    </member>
+    <member name="T:FortRise.CustomVariantInfo">
+      <summary>
+            A struct that represents a information for variant.
+            </summary>
+    </member>
+    <member name="F:FortRise.CustomVariantInfo.Name">
+      <summary>
+            Represents an name and id for the variant.
+            </summary>
+    </member>
+    <member name="F:FortRise.CustomVariantInfo.Description">
+      <summary>
+            Adds a description to the given variant
+            </summary>
+    </member>
+    <member name="F:FortRise.CustomVariantInfo.Header">
+      <summary>
+            A header to organize the variant in some way.
+            </summary>
+    </member>
+    <member name="F:FortRise.CustomVariantInfo.Flags">
+      <summary>
+            A flags on how the variants will behave in the list.
+            </summary>
+    </member>
+    <member name="F:FortRise.CustomVariantInfo.Icon">
+      <summary>
+            An icon for the variant to show in the list. 
+            </summary>
+    </member>
+    <member name="F:FortRise.CustomVariantInfo.Exclusions">
+      <summary>
+            What pickup to not appear when this variant is enabled.
+            </summary>
+    </member>
+    <member name="T:FortRise.CustomVariantFlags">
+      <summary>
+            A list of flags for variants behavior on the variant list.
+            </summary>
+    </member>
+    <member name="M:TowerFall.patch_Enemy.Load">
+      <summary>
+            Additional initialization method after the constructor was called.
+            </summary>
+    </member>
+    <member name="T:TowerFall.UIModal">
+      <summary>
+            A modal api that can be used to spawn a dialog that can be added in the scene.
+            </summary>
+    </member>
+    <member name="M:TowerFall.UIModal.SetStartIndex(System.Int32)">
+      <summary>
+            Set the start index of a modal. It will automatically adjust if the index is out of bounds.
+            </summary>
+      <param name="index">A start index</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.SetStartIndex(System.String)">
+      <summary>
+            Set the start index of a modal based on the option name. It will automatically adjust if the index is out of bounds.
+            </summary>
+      <param name="optionName">An option name</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.SetTitle(System.String)">
+      <summary>
+            Set the title of a modal.
+            </summary>
+      <param name="title">A title of the modal you want to set</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.SetFillerColor(Microsoft.Xna.Framework.Color)">
+      <summary>
+            Set the filler text a color.
+            </summary>
+      <param name="color">A color of a filler text you want to set</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.SetSelectionColor(Microsoft.Xna.Framework.Color)">
+      <summary>
+            Set the selection text a color.
+            </summary>
+      <param name="color">A color of a selection text you want to set</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.SetAltSelectionColor(Microsoft.Xna.Framework.Color)">
+      <summary>
+            Set the alternate selection text a color.
+            </summary>
+      <param name="color">A color of a alternate selection text you want to set</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.SetColor(Microsoft.Xna.Framework.Color)">
+      <summary>
+            Set the default text color or unselected text color.
+            </summary>
+      <param name="color">A color of an unselected text you want to set</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.HideTitle(System.Boolean)">
+      <summary>
+            Hides the title of a modal.
+            </summary>
+      <param name="hide">A value between true or false to hide the title</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.SetOnBackCallBack(System.Action)">
+      <summary>
+            A callback when a user press the `BACK` button.
+            </summary>
+      <param name="onBack">A function or callback that will be called when the use press `BACK` button</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.AddItem(System.String,System.Action)">
+      <summary>
+            Add an item or button that a user can interact with.
+            </summary>
+      <param name="name">A name of the text in an item</param>
+      <param name="action">A function or callback that will be called when the user press this item</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="M:TowerFall.UIModal.AddFiller(System.String)">
+      <summary>
+            Add an extra item that represents just a normal plain text and cannot be interact. (This item will be in the priority first).
+            </summary>
+      <param name="name">A name of the text in an item</param>
+      <returns>A UIModal context</returns>
+    </member>
+    <member name="T:YYProject.XXHash.XXHash32">
+      <summary>
+             Represents the class which provides a implementation of the xxHash32 algorithm.
+             </summary>
+      <threadsafety static="true" instance="false" />
+    </member>
+    <member name="M:YYProject.XXHash.XXHash32.Create">
+      <summary>
+            Creates an instance of <see cref="T:YYProject.XXHash.XXHash32" /> class by default seed(0).
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash32.Create(System.String)">
+      <summary>
+            Creates an instance of the specified implementation of XXHash32 algorithm.
+            <para>This method always throws <see cref="T:System.NotSupportedException" />. </para></summary>
+      <param name="algName">The hash algorithm implementation to use.</param>
+      <returns>This method always throws <see cref="T:System.NotSupportedException" />. </returns>
+      <exception cref="T:System.NotSupportedException">This method is not be supported.</exception>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash32.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:YYProject.XXHash.XXHash32" /> class by default seed(0).
+            </summary>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash32.#ctor(System.UInt32)">
+      <summary>
+            Initializes a new instance of the <see cref="T:YYProject.XXHash.XXHash32" /> class, and sets the <see cref="P:YYProject.XXHash.XXHash32.Seed" /> to the specified value.
+            </summary>
+      <param name="seed">Represent the seed to be used for xxHash32 computing.</param>
+    </member>
+    <member name="P:YYProject.XXHash.XXHash32.HashUInt32">
+      <summary>
+            Gets the <see cref="T:System.UInt32" /> value of the computed hash code.
+            </summary>
+      <exception cref="T:System.InvalidOperationException">Hash computation has not yet completed.</exception>
+    </member>
+    <member name="P:YYProject.XXHash.XXHash32.Seed">
+      <summary>
+            Gets or sets the value of seed used by xxHash32 algorithm.
+            </summary>
+      <exception cref="T:System.InvalidOperationException">Hash computation has not yet completed.</exception>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash32.Initialize">
+      <summary>
+            Initializes this instance for new hash computing.
+            </summary>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash32.HashCore(System.Byte[],System.Int32,System.Int32)">
+      <summary>
+            Routes data written to the object into the hash algorithm for computing the hash.
+            </summary>
+      <param name="array">The input to compute the hash code for.</param>
+      <param name="ibStart">The offset into the byte array from which to begin using data.</param>
+      <param name="cbSize">The number of bytes in the byte array to use as data.</param>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash32.HashFinal">
+      <summary>
+            Finalizes the hash computation after the last data is processed by the cryptographic stream object.
+            </summary>
+      <returns>The computed hash code.</returns>
+    </member>
+    <member name="T:YYProject.XXHash.XXHash64">
+      <summary>
+            Represents the class which provides a implementation of the xxHash64 algorithm.
+            </summary>
+      <threadsafety static="true" instance="false" />
+    </member>
+    <member name="M:YYProject.XXHash.XXHash64.Create">
+      <summary>
+            Creates an instance of <see cref="T:YYProject.XXHash.XXHash64" /> class by default seed(0).
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash64.Create(System.String)">
+      <summary>
+            Creates an instance of the specified implementation of XXHash64 algorithm.
+            <para>This method always throws <see cref="T:System.NotSupportedException" />. </para></summary>
+      <param name="algName">The hash algorithm implementation to use.</param>
+      <returns>This method always throws <see cref="T:System.NotSupportedException" />. </returns>
+      <exception cref="T:System.NotSupportedException">This method is not be supported.</exception>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash64.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:YYProject.XXHash.XXHash64" /> class by default seed(0).
+            </summary>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash64.#ctor(System.UInt32)">
+      <summary>
+            Initializes a new instance of the <see cref="T:YYProject.XXHash.XXHash64" /> class, and sets the <see cref="P:YYProject.XXHash.XXHash64.Seed" /> to the specified value.
+            </summary>
+      <param name="seed">Represent the seed to be used for xxHash64 computing.</param>
+    </member>
+    <member name="P:YYProject.XXHash.XXHash64.HashUInt64">
+      <summary>
+            Gets the <see cref="T:System.UInt64" /> value of the computed hash code.
+            </summary>
+      <exception cref="T:System.InvalidOperationException">Computation has not yet completed.</exception>
+    </member>
+    <member name="P:YYProject.XXHash.XXHash64.Seed">
+      <summary>
+             Gets or sets the value of seed used by xxHash64 algorithm.
+            </summary>
+      <exception cref="T:System.InvalidOperationException">Computation has not yet completed.</exception>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash64.Initialize">
+      <summary>
+            Initializes this instance for new hash computing.
+            </summary>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash64.HashCore(System.Byte[],System.Int32,System.Int32)">
+      <summary>
+            Routes data written to the object into the hash algorithm for computing the hash.
+            </summary>
+      <param name="array">The input to compute the hash code for.</param>
+      <param name="ibStart">The offset into the byte array from which to begin using data.</param>
+      <param name="cbSize">The number of bytes in the byte array to use as data.</param>
+    </member>
+    <member name="M:YYProject.XXHash.XXHash64.HashFinal">
+      <summary>
+            Finalizes the hash computation after the last data is processed by the cryptographic stream object.
+            </summary>
+      <returns>The computed hash code.</returns>
+    </member>
+    <member name="M:MonoMod.MonoModRules.GetEnumeratorMoveNext(Mono.Cecil.MethodDefinition)">
+      <summary>
+            Get MoveNext() method of the compiler-generated enumerator class of the specified method.
+            </summary>
+    </member>
+  </members>
+</doc>
