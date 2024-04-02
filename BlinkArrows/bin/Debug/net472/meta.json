@@ -1,7 +1,7 @@
 {
-	"name": "TEST! All Arrows",
+	"name": "Blink Arrows",
 	"version": "1.0.0",
-	"author": "CoolModder",
-	"description": "oh hi thiz modz CONtentz HAZ bin replacd wif arrowz by kitTENz k?",
+	"author": "Konspiracie/Astreisk",
+	"description": "A few more arrows to play with.",
 	"dll": "test.dll"
 }

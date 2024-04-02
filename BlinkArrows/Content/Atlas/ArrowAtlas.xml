@@ -43,5 +43,30 @@
 	<SubTexture name="SeekerArrowIntrusiveThoughts" x="56" y="57" width="14" height="14"/>
 	<SubTexture name="SeekerArrowTentacles" x="0" y="71" width="25" height="10"/>
 	<SubTexture name="SeekerArrowTrail" x="0" y="81" width="14" height="20"/>
+	<SubTexture name="SokobanArrowHud" x="54" y="20" width="5" height="9"/>
+	<SubTexture name="SokobanArrow" x="87" y="0" width="13" height="4"/>
+	<SubTexture name="SokobanArrowBuried" x="87" y="4" width="13" height="4"/>
+	<SubTexture name="SokobanArrowPickup" x="63" y="8" width="12" height="12"/>
+	<SubTexture name="SokobanArrowStartWith" x="70" y="29" width="14" height="14"/>
+	<SubTexture name="SokobanArrowExclude" x="70" y="43" width="14" height="14"/>
+	<SubTexture name="SokobanArrowGrudge" x="70" y="57" width="14" height="14"/>
+	<SubTexture name="SokobanArrowBlock" x="14" y="76" width="20" height="20"/>
+	<SubTexture name="SokobanArrowBlockEyes" x="24" y="71" width="10" height="4"/>
+	<SubTexture name="LatencyArrowHud" x="59" y="20" width="5" height="9"/>
+	<SubTexture name="LatencyArrow" x="100" y="0" width="13" height="4"/>
+	<SubTexture name="LatencyArrowBuried" x="100" y="4" width="13" height="4"/>
+	<SubTexture name="LatencyArrowPickup" x="75" y="8" width="12" height="12"/>
+	<SubTexture name="LatencyArrowStartWith" x="84" y="29" width="14" height="14"/>
+	<SubTexture name="LatencyArrowExclude" x="84" y="43" width="14" height="14"/>
+	<SubTexture name="LatencyArrowResynchronization" x="84" y="57" width="14" height="14"/>
+	<SubTexture name="LatencyArrowFletching" x="34" y="71" width="3" height="4"/>
+	<SubTexture name="DecoyArrowHud" x="64" y="20" width="5" height="9"/>
+	<SubTexture name="DecoyArrow" x="113" y="0" width="15" height="6"/>
+	<SubTexture name="DecoyArrowBuried" x="113" y="6" width="15" height="6"/>
+	<SubTexture name="DecoyArrowPickup" x="87" y="8" width="12" height="12"/>
+	<SubTexture name="DecoyArrowStartWith" x="98" y="29" width="14" height="14"/>
+	<SubTexture name="DecoyArrowExclude" x="98" y="43" width="14" height="14"/>
+	<SubTexture name="DecoyArrowCerberus" x="98" y="57" width="14" height="14"/>
+
 	
 </TextureAtlas>

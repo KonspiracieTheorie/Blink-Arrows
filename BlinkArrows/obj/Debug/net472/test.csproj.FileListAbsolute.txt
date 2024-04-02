@@ -46,9 +46,6 @@ C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\TestMod\bin\Debug\n
 C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\Content\Atlas\ArrowAtlas.png
 C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\Content\Atlas\ArrowAtlas.png~
 C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\Content\Atlas\ArrowAtlas.xml
-C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\Content\Atlas\SpriteData.xml
-C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\Content\Atlas\VariantAtlas.png
-C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\Content\Atlas\VariantAtlas.xml
 C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\meta.json
 C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\test.dll
 C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\test.pdb
@@ -88,4 +85,3 @@ C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\obj\Deb
 C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\obj\Debug\net472\test.csproj.Up2Date
 C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\obj\Debug\net472\test.dll
 C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\obj\Debug\net472\test.pdb
-C:\Program Files (x86)\Steam\steamapps\common\TowerFall\Mods\BlinkArrows\bin\Debug\net472\Content\Atlas\VariantAtlas.png~
